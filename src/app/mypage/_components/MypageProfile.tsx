@@ -49,6 +49,7 @@ const MypageProfile = () => {
           });
 
           router.push('/');
+          router.refresh();
         } catch (error) {
           console.error(error);
 

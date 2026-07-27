@@ -35,13 +35,18 @@ export const deleteUser = async () => {
   const supabase = createClient();
   const {
     data: { user },
+    error,
   } = await supabase.auth.getUser();
 
-  if (user) {
-    const { error } = await adminAuthClient.deleteUser(user.id);
-    if (error) {
-      console.error(error);
-    }
+  if (error || !user) {
+    throw new Error('사용자를 찾을 수 없습니다.');
   }
-};
 
+  const { error: deleteError } = await adminAuthClient.deleteUser(user.id);
+
+  if (deleteError) {
+    throw deleteError;
+  }
+
+  await supabase.auth.signOut();
+};
