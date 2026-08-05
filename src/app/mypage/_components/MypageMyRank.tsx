@@ -17,9 +17,9 @@ const MypageMyRank = () => {
   const user_id = data?.id;
 
   const { data: user } = useUser(email);
-  const { data: beforeRank } = useUserRank(user_id!, weekCalculate(-1));
+  const { data: beforeRank } = useUserRank(user_id, weekCalculate(-1));
 
-  const [rank, setRank] = useState<number>(0);
+  const [rank, setRank] = useState<number | null>(null);
 
   const fetchLatestWeekRank = async () => {
     const latestWeekData = await fetchLatestWeekData();

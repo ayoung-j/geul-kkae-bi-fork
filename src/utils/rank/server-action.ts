@@ -30,7 +30,7 @@ export const fetchLatestWeekData = async () => {
     .not('week', 'is', null)
     .order('week', { ascending: false })
     .limit(1)
-    .single();
+    .maybeSingle();
   if (latestWeekData) {
     return latestWeekData;
   } else {
@@ -60,7 +60,7 @@ export const fetchUserRankDataThisWeek = async (userId: string, latestWeek: numb
     .select(`*,user(nickname)`)
     .eq('week', latestWeek)
     .eq('user_id', userId)
-    .single();
+    .maybeSingle();
   if (data) {
     return data;
   } else {
@@ -90,7 +90,7 @@ export const fetchUserLastRank = async (userId: string | null | undefined, lastW
     .select()
     .eq('user_id', userId)
     .eq('week', lastWeek)
-    .single();
+    .maybeSingle();
   if (data) {
     return data;
   } else {

@@ -11,7 +11,8 @@ import LineTitle from '@/components/LineTitle';
 const MypageCharacter = () => {
   const { data } = useAuth();
   const user_id = data?.id;
-  const { data: rank } = useUserRank(user_id!, weekCalculate(0));
+  const { data: rank } = useUserRank(user_id, weekCalculate(0));
+  const total = rank?.total ?? null;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleCloseModal = () => setIsModalOpen(false);
@@ -25,7 +26,7 @@ const MypageCharacter = () => {
 
   return (
     <div className='relative rounded-3xl aspect-[714/370] bg-primary-100 overflow-hidden max-md:rounded-[0.875rem]'>
-      {rank?.total === null ? (
+      {total === null ? (
         <Image
           src='/character0.svg'
           alt='character0'
@@ -37,7 +38,7 @@ const MypageCharacter = () => {
       ) : (
         ''
       )}
-      {rank?.total !== null && rank?.total >= 0 && rank?.total < 75 ? (
+      {total !== null && total < 75 ? (
         <Image
           src='/character1.svg'
           alt='character1'
@@ -49,7 +50,7 @@ const MypageCharacter = () => {
       ) : (
         ''
       )}
-      {rank?.total >= 75 && rank?.total < 150 ? (
+      {total >= 75 && total < 150 ? (
         <Image
           src='/character2.svg'
           alt='character2'
@@ -61,7 +62,7 @@ const MypageCharacter = () => {
       ) : (
         ''
       )}
-      {rank?.total >= 150 && rank?.total < 224 ? (
+      {total >= 150 && total < 224 ? (
         <Image
           src='/character3.svg'
           alt='character3'
@@ -73,7 +74,7 @@ const MypageCharacter = () => {
       ) : (
         ''
       )}
-      {rank?.total >= 225 && rank?.total <= 300 ? (
+      {total >= 225 && total <= 300 ? (
         <Image
           src='/character4.svg'
           alt='character4'

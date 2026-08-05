@@ -49,7 +49,7 @@ export const addScores = async ({ userId, checking, speaking, writing }: addScor
   const total = isAllPresent ? checking + speaking + writing : null;
   const week = weekNumber;
 
-  const { data } = await supabase.from('rank').select('*').eq('user_id', userId).eq('week', week).single();
+  const { data } = await supabase.from('rank').select('*').eq('user_id', userId).eq('week', week).maybeSingle();
 
   if (!data && !isAllNone) {
     const { error: insertError } = await supabase

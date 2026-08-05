@@ -8,7 +8,7 @@ import { useUserRank } from '@/queries/useRank';
 const MypageMyScore = () => {
   const { data: user } = useAuth();
   const user_id = user?.id;
-  const { data: rank } = useUserRank(user_id!, weekCalculate(0));
+  const { data: rank } = useUserRank(user_id, weekCalculate(0));
 
   return (
     <div className='rounded-3xl w-full h-full bg-primary-50 max-lg:h-auto max-md:min-w-[auto] max-md:rounded-[0.875rem]'>
@@ -19,9 +19,7 @@ const MypageMyScore = () => {
 
           <div className='max-md:w-full max-md:flex max-md:items-center max-md:justify-between max-md:px-6 max-md:py-2'>
             <p className='title-20 text-primary-400 text-center mt-6 max-md:text-base max-md:mt-0'>총점</p>
-            <p className='body-32 text-primary-700 mt-1 max-md:text-xl max-md:mt-0'>
-              {rank?.total === null ? '-' : rank?.total}점
-            </p>
+            <p className='body-32 text-primary-700 mt-1 max-md:text-xl max-md:mt-0'>{rank?.total ?? '-'}점</p>
           </div>
         </div>
         <div className='h-1 bg-gray-50 border-t-2 border-primary-100 hidden max-md:block' />
@@ -40,9 +38,7 @@ const MypageMyScore = () => {
               </div>
               <div className='flex flex-col'>
                 <span className='title-16 pb-2 text-primary-400 max-md:text-xs max-md:pb-1'>나야, 발음왕</span>
-                <span className='body-30 text-primary-700 max-md:text-xl'>
-                  {rank?.speaking === null ? '-' : rank?.speaking}점
-                </span>
+                <span className='body-30 text-primary-700 max-md:text-xl'>{rank?.speaking ?? '-'}점</span>
               </div>
             </div>
           </div>
@@ -61,9 +57,7 @@ const MypageMyScore = () => {
               </div>
               <div className='flex flex-col'>
                 <span className='title-16 pb-2 text-primary-400 max-md:text-xs max-md:pb-1'>틀린 말 탐정단</span>
-                <span className='body-30 text-primary-700 max-md:text-xl'>
-                  {rank?.checking === null ? '-' : rank?.checking}점
-                </span>
+                <span className='body-30 text-primary-700 max-md:text-xl'>{rank?.checking ?? '-'}점</span>
               </div>
             </div>
           </div>
@@ -82,9 +76,7 @@ const MypageMyScore = () => {
               </div>
               <div className='flex flex-col'>
                 <span className='title-16 pb-2 text-primary-400 max-md:text-xs max-md:pb-1'>빈칸 한 입</span>
-                <span className='body-30 text-primary-700 max-md:text-xl'>
-                  {rank?.writing === null ? '-' : rank?.writing}점
-                </span>
+                <span className='body-30 text-primary-700 max-md:text-xl'>{rank?.writing ?? '-'}점</span>
               </div>
             </div>
           </div>
