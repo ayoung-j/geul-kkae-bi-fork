@@ -496,10 +496,10 @@ const updatehandler = (user: User) => {
 };
 
 // 프로필 사진 storage에 저장 및 프로필 사진 storage에서 가져오기
-const uploadImgHandler = async (e: ChangeEvent<HTMLInputElement>) => {
+const uploadImageHandler = async (e: ChangeEvent<HTMLInputElement>) => {
   const file = e.target.files?.[0];
-  const name = await saveProfile(file!);
-  const fullpath = await fetchProfile(name.toString());
+  const name = await saveProfileImage(file!);
+  const fullpath = await fetchProfileImage(name.toString());
   setUser({ ...user!, image: fullpath.publicUrl });
 };
 ```

@@ -3,7 +3,13 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
-import { fetchCurrentUserInfoByEmail, fetchProfile, saveProfile, updateUserInfo } from '@/utils/user/client-action';
+import {
+  fetchCurrentUserInfoByEmail,
+  fetchProfileImage,
+  saveProfileImage,
+  deleteProfileImage,
+  updateUserInfo,
+} from '@/utils/user/client-action';
 import { FieldValues, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAuth } from '@/queries/useAuth';
@@ -18,6 +24,8 @@ import DefaultInput from '@/components/DefaultInput';
 
 const ChangeProfile = () => {
   const [user, setUser] = useState<User>();
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [oldImage, setOldImage] = useState<string | null>(null);
   const { data } = useAuth();
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -37,8 +45,10 @@ const ChangeProfile = () => {
     const info = await fetchCurrentUserInfoByEmail(email);
 
     setUser(info);
+    setOldImage(info?.image || null);
 
     if (info) {
+      setOldImage(info.image || null);
       setValue('nickname', info.nickname || '');
       setValue('introduction', info.introduction || '');
     }
@@ -48,11 +58,16 @@ const ChangeProfile = () => {
     fetchUserInfo();
   }, []);
 
-  const uploadImgHandler = async (e: ChangeEvent<HTMLInputElement>) => {
+  const uploadImageHandler = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    const name = await saveProfile(file!);
-    const fullpath = await fetchProfile(name.toString());
-    setUser((prev) => prev && { ...prev, image: fullpath.publicUrl });
+
+    if (!file) return;
+
+    setSelectedImage(file);
+
+    const previewUrl = URL.createObjectURL(file);
+
+    setUser((prev) => prev && { ...prev, image: previewUrl });
   };
 
   const onSubmit = async (values: FieldValues) => {
@@ -63,7 +78,18 @@ const ChangeProfile = () => {
         introduction: values.introduction,
       };
 
-      updateUserInfo(user.user_id, updatedUser.image, updatedUser.nickname, updatedUser.introduction);
+      if (selectedImage) {
+        const name = await saveProfileImage(selectedImage);
+        const fullpath = await fetchProfileImage(name.toString());
+
+        updatedUser.image = fullpath.publicUrl;
+      }
+
+      await updateUserInfo(user.user_id, updatedUser.image, updatedUser.nickname, updatedUser.introduction);
+
+      if (oldImage && oldImage !== updatedUser.image && !oldImage.includes('default_img.webp')) {
+        await deleteProfileImage(oldImage);
+      }
 
       const email = data?.user_metadata.email;
       queryClient.invalidateQueries({ queryKey: ['users', email] });
@@ -105,7 +131,7 @@ const ChangeProfile = () => {
               type='file'
               className='hidden'
               accept='image/png, image/jpeg'
-              onChange={(e) => uploadImgHandler(e)}
+              onChange={(e) => uploadImageHandler(e)}
             />
             <label
               htmlFor='picture'

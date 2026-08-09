@@ -45,7 +45,7 @@ export const fetchCurrentUserInfoByEmail = async (email: string) => {
   const { data, error } = await supabase.from('user').select('*').eq('email', email).single();
 
   if (error) {
-    console.error('Error fetching user info:', error);
+    console.error('사용자 정보 조회 오류:', error);
     return null;
   }
 
@@ -53,7 +53,7 @@ export const fetchCurrentUserInfoByEmail = async (email: string) => {
 };
 
 // 프로필 사진 storage에 저장
-export const saveProfile = async (image: File) => {
+export const saveProfileImage = async (image: File) => {
   const supabase = createClient();
   const time = new Date().getTime();
   await supabase.storage.from('profile').upload(time + '.jpg', image!);
@@ -62,11 +62,25 @@ export const saveProfile = async (image: File) => {
 };
 
 // 프로필 사진 storage에서 가져오기
-export const fetchProfile = async (name: string) => {
+export const fetchProfileImage = async (name: string) => {
   const supabase = createClient();
   const { data } = supabase.storage.from('profile').getPublicUrl(name + '.jpg');
 
   return data;
+};
+
+// 프로필 사진 storage에서 삭제
+export const deleteProfileImage = async (imageUrl: string) => {
+  const supabase = createClient();
+  const fileName = imageUrl.split('/').pop();
+  
+  if (!fileName) return;
+
+  const { error } = await supabase.storage.from('profile').remove([fileName]);
+
+  if (error) {
+    console.error('프로필 이미지 삭제 오류:', error);
+  }
 };
 
 // 프로필 수정
