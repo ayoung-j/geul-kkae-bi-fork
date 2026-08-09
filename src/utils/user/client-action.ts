@@ -42,7 +42,7 @@ export const confirmNickname = async (nickname: string, currentNickname?: string
 // email로 현재 사용자 정보 조회
 export const fetchCurrentUserInfoByEmail = async (email: string) => {
   const supabase = createClient();
-  const { data, error } = await supabase.from('user').select('*').eq('email', email).single();
+  const { data, error } = await supabase.from('user').select('*').eq('email', email).maybeSingle();
 
   if (error) {
     console.error('사용자 정보 조회 오류:', error);
@@ -73,7 +73,7 @@ export const fetchProfileImage = async (name: string) => {
 export const deleteProfileImage = async (imageUrl: string) => {
   const supabase = createClient();
   const fileName = imageUrl.split('/').pop();
-  
+
   if (!fileName) return;
 
   const { error } = await supabase.storage.from('profile').remove([fileName]);
