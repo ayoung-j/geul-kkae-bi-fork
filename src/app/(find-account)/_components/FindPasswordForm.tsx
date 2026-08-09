@@ -27,32 +27,44 @@ const FindPasswordForm = () => {
   const onSubmit = async (values: FieldValues) => {
     const { email } = values;
 
-    const user = await fetchCurrentUserInfoByEmail(email);
+    try {
+      // 사용자 정보 조회
+      const user = await fetchCurrentUserInfoByEmail(email);
 
-    if (user?.provider === 'google' || user?.provider === 'kakao') {
-      Swal.fire({
-        html: `<div class="text-gray-700">해당 계정은 ${user?.provider} <br />소셜 로그인으로 가입되었습니다. <br />${user?.provider} 계정으로 로그인해주세요.</div>`,
-        customClass: {
-          title: 'swal-custom-title',
-          htmlContainer: 'swal-custom-text',
-        },
-        showConfirmButton: false,
-        footer: `<a href="/signin" class='swal-custom-button'>로그인하기</a>`,
-      });
-    } else {
-      const result = await findPassword(email);
-
-      if (result instanceof Error) {
-        Swal.fire({
-          html: `<div class="text-gray-700">해당 이메일로 비밀번호<br/>변경링크를 보내드렸어요!</div>`,
+      // 소셜 로그인 계정 확인
+      if (user?.provider === 'google' || user?.provider === 'kakao') {
+        await Swal.fire({
+          html: `<div class="text-gray-700">해당 계정은 ${user?.provider} <br />소셜 로그인으로 가입되었습니다. <br />${user?.provider} 계정으로 로그인해주세요.</div>`,
           customClass: {
             title: 'swal-custom-title',
             htmlContainer: 'swal-custom-text',
-            confirmButton: 'swal-custom-button',
           },
-          confirmButtonText: '확인',
+          showConfirmButton: false,
+          footer: `<a href="/signin" class='swal-custom-button'>로그인하기</a>`,
         });
       }
+
+      // 비밀번호 재설정 메일 전송
+      const result = await findPassword(email);
+
+      // 메일 전송 실패
+      if (result instanceof Error) {
+        console.error('비밀번호 재설정 메일 전송 오류:', result);
+        return;
+      }
+
+      // 메일 전송 성공
+      await Swal.fire({
+        html: `<div class="text-gray-700">해당 이메일로 비밀번호<br/>변경링크를 보내드렸어요!</div>`,
+        customClass: {
+          title: 'swal-custom-title',
+          htmlContainer: 'swal-custom-text',
+          confirmButton: 'swal-custom-button',
+        },
+        confirmButtonText: '확인',
+      });
+    } catch (error) {
+      console.error('비밀번호 찾기 오류:', error);
     }
   };
 
@@ -90,7 +102,7 @@ const FindPasswordForm = () => {
         <hr className='border-t-1 border-gray-200 my-[3.125rem] max-md:hidden' />
         <div className='flex justify-center mt-[3.125rem] max-md:mt-[3.75rem]'>
           <DefaultButton
-            disabled={!formState.isValid}
+            disabled={!formState.isValid || formState.isSubmitting}
             className='w-full max-w-[15rem] max-md:max-w-none'
           >
             메일 전송
