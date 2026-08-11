@@ -5,8 +5,6 @@ import { Word } from '@/types/learning';
 import './style.css';
 import Image from 'next/image';
 
-export const revalidate = 86400;
-
 let firstIndex = 0;
 
 function get10Words(array: string[]) {
@@ -46,7 +44,7 @@ const LearningPage = async () => {
   const today = date.getFullYear() + `. ` + (date.getMonth() + 1) + `. ` + date.getDate();
 
   return (
-    <div className='container pt-10 max-md:pt-4'>
+    <div className='container pt-10 max-md:pt-5 pb-[1.625rem] max-md:pb-5'>
       <div className='flex items-end justify-between max-md:flex-col max-md:items-center max-md:justify-center max-md:gap-1'>
         <div className='flex items-end'>
           <div className='text-[2.625rem] font-yangjin text-primary-300 max-md:text-2xl'>
@@ -55,9 +53,9 @@ const LearningPage = async () => {
           <div className='relative flex items-center w-[4.5rem] aspect-[72/66] ml-[0.625rem] max-md:w-[2.625rem] max-md:ml-1'>
             <Image
               src='/icon_cards_learning.svg'
-              alt='학습 대제목 옆 아이콘'
+              alt='카드 아이콘'
               fill
-              sizes='4.5rem'
+              sizes='100%'
               priority
             />
           </div>
@@ -76,13 +74,11 @@ const LearningPage = async () => {
           </div>
         ))}
       </div>
-      <div className='relative w-[153px] h-[14px] mx-auto mt-[22px] mb-[16px]'>
-        <Image
-          src='/copyright_text_learning.svg'
-          alt='학습 대제목 옆 아이콘'
-          fill
-          sizes='0.81rem'
-        />
+      <div className='pt-6 text-center text-xs font-semibold text-gray-500 max-md:pt-5 max-md:text-[0.625rem]'>
+        <span className='text-gray-600'>자료제공</span>
+        <span className='h-[0.875rem] mx-[0.375rem] border-l-[2px] bg-gray-300'></span>
+        <span>우리말샘</span>
+        <span className='text-[0.625rem] text-gray-300 ml-1'>국립국어원</span>
       </div>
     </div>
   );

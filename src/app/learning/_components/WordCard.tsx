@@ -3,7 +3,7 @@
 import { ExtractWordListFromWord } from '@/types/learning';
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { Dialog, DialogClose, DialogContent } from '@/components/ui/dialog';
+import { Dialog, DialogClose, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { X } from 'lucide-react';
 import LineTitle from '@/components/LineTitle';
@@ -30,6 +30,7 @@ const WordCard = ({ item }: { item: ExtractWordListFromWord }) => {
         onOpenChange={setIsOpen}
       >
         <DialogContent className='flex w-[44.625rem] h-[27.375rem] max-w-[90vw] max-h-[90vh] !rounded-[1.25rem] px-11 py-[2.375rem] bg-primary-400 border-none shadow-none justify-center items-center max-md:h-auto max-md:px-[1.375rem] max-md:py-6'>
+          <DialogTitle className='sr-only'>오늘의 학습카드</DialogTitle>
           <div className='flex justify-between w-full h-full max-md:flex-col'>
             <div className='flex flex-col justify-between py-[0.375rem]'>
               <div className='text-center mb-3 max-md:mb-6'>

@@ -129,7 +129,7 @@
 
 @media (max-width: 768px) {
   .word-card .nth-card {
-    background-size: 96px auto;
+    background-size: 112px auto;
     background-position: center bottom 32px;
   }
   .word-card .nth-card-4:before,
