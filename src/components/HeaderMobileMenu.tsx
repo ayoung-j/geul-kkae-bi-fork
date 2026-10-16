@@ -3,7 +3,7 @@
 import MyProfileInfo from './MyProfileInfo';
 import { House, UserRound, Gamepad2, LogOut, Medal, BookA, BookOpenCheck } from 'lucide-react';
 import { useAuth } from '@/queries/useAuth';
-import { useSignout } from '@/utils/sign/signout';
+import { useSignOut } from '@/utils/sign/useSignOut';
 import { HeaderMobileMenuData } from '@/types/header';
 import { Button } from './ui/button';
 import HeaderMobileMenuItem from './HeaderMobileMenuItem';
@@ -72,7 +72,7 @@ const HEADER_MOBILE_MENU_DATA: HeaderMobileMenuData[] = [
 
 const HeaderMobileMenu = () => {
   const { data: user } = useAuth();
-  const { handleSignout } = useSignout();
+  const { handleSignOut } = useSignOut();
 
   return (
     <div className='heaber-moblie-menu'>
@@ -100,7 +100,7 @@ const HeaderMobileMenu = () => {
           <div className='h-[0.375rem] bg-primary-50 border-t-2 border-primary-100 mt-auto' />
           <Button
             className='flex gap-[0.375rem] px-4 py-[0.625rem] w-full h-[2.375rem] justify-start text-xs font-bold rounded-none text-gray-600 bg-white hover:bg-primary-50'
-            onClick={handleSignout}
+            onClick={handleSignOut}
           >
             <LogOut className='text-base' />
             로그아웃

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { createClient } from '@/utils/supabase/client';
-import { useSignout } from '@/utils/sign/signout';
+import { useSignOut } from '@/utils/sign/useSignOut';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '@/queries/useAuth';
 import { useUser } from '@/queries/useUser';
@@ -20,7 +20,7 @@ const HeaderInfoChange = () => {
   const { data, isLoading } = useAuth();
   const email = data?.user_metadata.email;
   const { data: user } = useUser(email);
-  const { handleSignout } = useSignout();
+  const { handleSignOut } = useSignOut();
   const [open, setOpen] = useState(false);
 
   const handleOpenChange = (isOpen: boolean) => {
@@ -86,7 +86,7 @@ const HeaderInfoChange = () => {
                 </div>
                 <Button
                   className='flex gap-[0.375rem] w-full justify-start text-sm font-bold rounded-none bg-primary-50 text-gray-500 hover:bg-primary-100'
-                  onClick={handleSignout}
+                  onClick={handleSignOut}
                 >
                   <LogOut className='text-base' />
                   로그아웃
@@ -112,7 +112,7 @@ const HeaderInfoChange = () => {
             size='sm'
             className='min-w-24 max-md:min-w-14'
           >
-            <Link href='/signin'>로그인</Link>
+            <Link href='/sign-in'>로그인</Link>
           </DefaultButton>
         </div>
       )}

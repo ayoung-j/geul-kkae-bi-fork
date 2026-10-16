@@ -1,13 +1,10 @@
 'use client';
 import React, { useEffect, useState } from 'react';
+import { ModalProps } from '@/types/result';
 import { CheckingResult } from '@/types/checking';
 import Image from 'next/image';
 
-type Props = {
-  handleCloseModal: () => void;
-};
-
-const ModalChecking = ({ handleCloseModal }: Props) => {
+const ModalChecking = ({ handleCloseModal }: ModalProps) => {
   const [result, setResult] = useState<CheckingResult[]>([]);
   const [openResult, setOpenResult] = useState<number | null>(null);
 

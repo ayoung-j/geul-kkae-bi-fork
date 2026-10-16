@@ -16,7 +16,7 @@ const QuizTimer: React.FC<QuizTimerProps> = ({ onTimeOver, isAllQuestions, isMob
 
   useEffect(() => {
     if (!workerRef.current) {
-      workerRef.current = new Worker(new URL('../util/TimerWorker.js', import.meta.url));
+      workerRef.current = new Worker(new URL('../utils/TimerWorker.js', import.meta.url));
 
       workerRef.current.onmessage = (e) => {
         if (e.data === 'timeover') {

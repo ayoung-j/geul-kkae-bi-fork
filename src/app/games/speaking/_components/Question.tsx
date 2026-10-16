@@ -175,7 +175,7 @@ const Question = ({ text, randomText, wrongAnswer, getWrongAnswer }: QuestionPro
                   >
                     <span className='md:hidden title-16 '>다음</span>
                     <Image
-                      src='/ico_speak_next_btn.svg'
+                      src='/icon_speak_next_btn.svg'
                       width={30}
                       height={30}
                       alt='다음'

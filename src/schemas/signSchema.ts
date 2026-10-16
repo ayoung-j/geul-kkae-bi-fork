@@ -3,14 +3,14 @@ import { z } from 'zod';
 import { getPasswordSchema } from './commonSchema';
 
 // 로그인
-export const signinSchema = z.object({
+export const signInSchema = z.object({
   email: z.string().email({ message: '이메일을 올바르게 입력해 주세요.' }),
   password: getPasswordSchema(),
   rememberedEmail: z.boolean().optional(),
 });
 
 // 회원가입
-export const signupSchema = z
+export const signUpSchema = z
   .object({
     email: z
       .string()

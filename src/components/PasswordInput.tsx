@@ -6,15 +6,15 @@ import { Eye, EyeOff } from 'lucide-react';
 import { FieldValues } from 'react-hook-form';
 import DefaultInput from './DefaultInput';
 
-interface Props {
+type PasswordInputProps = {
   field: FieldValues;
   placeholder: string;
   className?: string | null;
   inputClassName?: string | null;
   buttonClassName?: string | null;
-}
+};
 
-const PasswordInput = ({ field, placeholder, className, inputClassName, buttonClassName }: Props) => {
+const PasswordInput = ({ field, placeholder, className, inputClassName, buttonClassName }: PasswordInputProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (

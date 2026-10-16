@@ -5,12 +5,12 @@ import { HeaderMobileMenuProps } from '@/types/header';
 import { useAuth } from '@/queries/useAuth';
 import { useRank } from '@/queries/useRank';
 import { weekCalculate } from '@/utils/rank/client-action';
-import { useHandleMenuClick } from '@/utils/header/handleMenuClick';
+import { useMenuClick } from '@/utils/header/useMenuClick';
 
 const HeaderMobileMenuItem = ({ item }: HeaderMobileMenuProps) => {
   const { data: user } = useAuth();
   const { data: ranks } = useRank(weekCalculate(0));
-  const handleMenuClick = useHandleMenuClick();
+  const handleMenuClick = useMenuClick();
   const link = item.link ?? '';
 
   return (

@@ -1,17 +1,8 @@
-import Link from 'next/link';
 import React from 'react';
+import Link from 'next/link';
+import { StatusCardProps } from '@/types/result';
 
-interface unMatchedGamesProp {
-  type: string;
-  score: number;
-  name: string;
-  backgroundColor: string;
-  titleColor1: string;
-  titleColor2: string;
-  lineColor: string;
-}
-
-const StatusCard = ({ unMatchedGames }: { unMatchedGames: unMatchedGamesProp[] | undefined }) => {
+const StatusCard = ({ unMatchedGames }: StatusCardProps) => {
   return (
     <div className='flex flex-col justify-between w-[17.625rem] gap-[0.625rem] max-lg:flex-row max-lg:w-full max-md:px-4 max-md:pb-5 max-md:gap-4'>
       {unMatchedGames?.map((game) => {

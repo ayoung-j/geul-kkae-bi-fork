@@ -1,6 +1,6 @@
 'use client';
 import browserClient from '@/utils/supabase/client';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import QuizTimer from './_components/QuizTimer';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
@@ -15,6 +15,7 @@ import {
   useUpdateWritingMutation,
 } from '@/mutations/writing-mutation';
 import { weekNumber } from '@/utils/week/weekNumber';
+import { useIsMobile } from '@/utils/mediaquery/useMediaQuery';
 import { PartialQuestion, Question } from '@/types/writing';
 
 const WritingQuizPage = () => {
@@ -26,21 +27,13 @@ const WritingQuizPage = () => {
   const scoreRef = useRef(0);
   const [isAllQuestions, setIsAllQuestions] = useState(false);
   const [isTimeOver, setIsTimeOver] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useIsMobile();
   const allResults = useRef<PartialQuestion[]>([]);
   const question: Question = questions[currentQuizIndex];
   const router = useRouter();
   const insertScoreMutation = useInsertWritingMutation();
   const updateScoreMutation = useUpdateWritingMutation();
   const insertWritingResultMutation = useInsertWritingResultMutation();
-
-  const handleResize = () => setIsMobile(window.innerWidth <= 750);
-
-  useEffect(() => {
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   const moveToNextQuiz = (e: React.FormEvent) => {
     e.preventDefault();

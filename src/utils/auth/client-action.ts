@@ -3,7 +3,7 @@ import { createClient } from '../supabase/client';
 import { getURL } from '@/app/(sign)/utils/sign';
 
 // 회원가입
-export const signup = async (formData: SignUpWithPasswordCredentials) => {
+export const signUp = async (formData: SignUpWithPasswordCredentials) => {
   const supabase = createClient();
   const { data, error } = await supabase.auth.signUp(formData);
 
@@ -14,7 +14,7 @@ export const signup = async (formData: SignUpWithPasswordCredentials) => {
 };
 
 // 로그인
-export const signin = async (formData: SignInWithPasswordCredentials) => {
+export const signIn = async (formData: SignInWithPasswordCredentials) => {
   const supabase = createClient();
   const { data, error } = await supabase.auth.signInWithPassword(formData);
 
@@ -25,7 +25,7 @@ export const signin = async (formData: SignInWithPasswordCredentials) => {
 };
 
 // 구글 회원가입 및 로그인
-export const googleSignin = async () => {
+export const googleSignIn = async () => {
   const supabase = createClient();
   const redirectUrl = getURL();
   const { data, error } = await supabase.auth.signInWithOAuth({
@@ -42,7 +42,7 @@ export const googleSignin = async () => {
 };
 
 // 카카오 회원가입 및 로그인
-export const kakaoSignin = async () => {
+export const kakaoSignIn = async () => {
   const supabase = createClient();
   const redirectUrl = getURL();
   const { data, error } = await supabase.auth.signInWithOAuth({

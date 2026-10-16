@@ -1,13 +1,10 @@
 'use client';
+import React, { useEffect, useState } from 'react';
+import { ModalProps } from '@/types/result';
 import { SpeekResult } from '@/types/speeking';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
 
-type Props = {
-  handleCloseModal: () => void;
-};
-
-const ModalSpeaking = ({ handleCloseModal }: Props) => {
+const ModalSpeaking = ({ handleCloseModal }: ModalProps) => {
   const [result, setResult] = useState<SpeekResult[]>();
 
   useEffect(() => {
@@ -52,7 +49,7 @@ const ModalSpeaking = ({ handleCloseModal }: Props) => {
         onClick={handleCloseModal}
       >
         <Image
-          src='/ico_speak_close.svg'
+          src='/icon_speak_close.svg'
           width={48}
           height={48}
           alt='모달 닫기'

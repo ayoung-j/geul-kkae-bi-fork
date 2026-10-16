@@ -1,4 +1,4 @@
-export interface RankIncludingUserInfo {
+export type RankIncludingUserInfo = {
   user_id: string;
   checking: number;
   speaking: number;
@@ -9,9 +9,9 @@ export interface RankIncludingUserInfo {
   week: number;
   ranking: number;
   user: { image: string; nickname: string; introduction: string };
-}
+};
 
-export interface Rank {
+export type Rank = {
   user_id: string;
   checking: number;
   speaking: number;
@@ -21,9 +21,9 @@ export interface Rank {
   total: number;
   week: number;
   ranking: number;
-}
+};
 
-export interface UserProfile {
+export type UserProfile = {
   user_id: string;
   nickname: string;
   introduction: string;
@@ -31,4 +31,4 @@ export interface UserProfile {
   created_at: string;
   email: string;
   provider: null;
-}
+};

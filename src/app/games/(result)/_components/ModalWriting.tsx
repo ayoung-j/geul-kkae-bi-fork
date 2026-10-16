@@ -1,12 +1,9 @@
+import React, { useEffect, useState } from 'react';
+import { ModalProps } from '@/types/result';
 import { PartialQuestion } from '@/types/writing';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
 
-type Props = {
-  handleCloseModal: () => void;
-};
-
-const ModalWriting = ({ handleCloseModal }: Props) => {
+const ModalWriting = ({ handleCloseModal }: ModalProps) => {
   const [result, setResult] = useState<PartialQuestion[]>([]);
   const [openResult, setOpenResult] = useState<number | null>(null);
 

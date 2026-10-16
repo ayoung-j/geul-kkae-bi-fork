@@ -1,14 +1,14 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { signup } from '@/utils/auth/client-action';
+import { signUp } from '@/utils/auth/client-action';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FieldValues, useForm } from 'react-hook-form';
 import { translateErrorMessage } from '@/schemas/commonSchema';
-import { signupSchema } from '@/schemas/signSchema';
+import { signUpSchema } from '@/schemas/signSchema';
 import PasswordInput from '@/components/PasswordInput';
 import Swal from 'sweetalert2';
 import PasswordValidationInput from '@/components/PasswordValidationInput';
@@ -19,7 +19,7 @@ import { addScores } from '@/utils/rank/client-action';
 import { AuthError } from '@supabase/supabase-js';
 import { getLocalStorageValues } from '../utils/sign';
 
-const SignupForm = () => {
+const SignUpForm = () => {
   const router = useRouter();
   const { checking, speaking, writing } = getLocalStorageValues();
 
@@ -31,9 +31,9 @@ const SignupForm = () => {
     agreeToTerms: false,
   };
 
-  const form = useForm<z.infer<typeof signupSchema>>({
+  const form = useForm<z.infer<typeof signUpSchema>>({
     mode: 'onChange',
-    resolver: zodResolver(signupSchema),
+    resolver: zodResolver(signUpSchema),
     defaultValues,
   });
   const { getFieldState, watch, formState } = form;
@@ -43,7 +43,7 @@ const SignupForm = () => {
   const onSubmit = async (values: FieldValues) => {
     const { email, password, nickname } = values;
 
-    const result = await signup({
+    const result = await signUp({
       email,
       password,
       options: {
@@ -340,4 +340,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default SignUpForm;

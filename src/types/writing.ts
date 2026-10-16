@@ -1,9 +1,9 @@
-export interface QuizTimerProps {
+export type QuizTimerProps = {
   onTimeOver: () => void;
   isAllQuestions: boolean;
   isMobile: boolean;
   currentQuizIndex: number;
-}
+};
 
 export type MobileTutorialProps = {
   onStartGame: () => void;

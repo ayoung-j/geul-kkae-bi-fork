@@ -9,13 +9,13 @@ import Link from 'next/link';
 import Swal from 'sweetalert2';
 import { useUser } from '@/queries/useUser';
 import { deleteUser } from '@/utils/auth/server-action';
-import { useSignout } from '@/utils/sign/signout';
+import { useSignOut } from '@/utils/sign/useSignOut';
 
 const MypageProfile = () => {
   const { data } = useAuth();
   const email = data?.user_metadata.email;
   const { data: user } = useUser(email);
-  const { handleSignout } = useSignout();
+  const { handleSignOut } = useSignOut();
 
   const router = useRouter();
 
@@ -137,7 +137,7 @@ const MypageProfile = () => {
             <DefaultButton
               variant='text'
               className='text-white'
-              onClick={handleSignout}
+              onClick={handleSignOut}
             >
               로그아웃
             </DefaultButton>

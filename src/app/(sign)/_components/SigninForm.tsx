@@ -2,12 +2,12 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { signin } from '@/utils/auth/client-action';
+import { signIn } from '@/utils/auth/client-action';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FieldValues, useForm } from 'react-hook-form';
 import { translateErrorMessage } from '@/schemas/commonSchema';
-import { signinSchema } from '@/schemas/signSchema';
+import { signInSchema } from '@/schemas/signSchema';
 import Swal from 'sweetalert2';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -17,7 +17,7 @@ import PasswordInput from '@/components/PasswordInput';
 import { LockKeyhole, UserRound } from 'lucide-react';
 import Link from 'next/link';
 
-const SigninForm = () => {
+const SignInForm = () => {
   const router = useRouter();
 
   const defaultValues = {
@@ -25,16 +25,16 @@ const SigninForm = () => {
     password: '',
   };
 
-  const form = useForm<z.infer<typeof signinSchema>>({
+  const form = useForm<z.infer<typeof signInSchema>>({
     mode: 'onChange',
-    resolver: zodResolver(signinSchema),
+    resolver: zodResolver(signInSchema),
     defaultValues,
   });
   const { setValue } = form;
 
   const onSubmit = async (values: FieldValues) => {
     const { email, password, rememberedEmail } = values;
-    const result = await signin({ email, password });
+    const result = await signIn({ email, password });
 
     if (rememberedEmail) {
       localStorage.setItem('rememberedEmail', email);
@@ -132,7 +132,7 @@ const SigninForm = () => {
                   </label>
                 </div>
 
-                <ul className='signin-button-group'>
+                <ul className='sign-in-button-group'>
                   <li>
                     <Link
                       href='/find-password'
@@ -143,7 +143,7 @@ const SigninForm = () => {
                   </li>
                   <li>
                     <Link
-                      href='/signup'
+                      href='/sign-up'
                       className='caption-14 text-gray-300 hover:text-gray-400 transition-colors'
                     >
                       회원가입
@@ -163,4 +163,4 @@ const SigninForm = () => {
   );
 };
 
-export default SigninForm;
+export default SignInForm;

@@ -3,11 +3,11 @@ import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 
 // 로그아웃
-export const useSignout = () => {
+export const useSignOut = () => {
   const router = useRouter();
   const supabase = createClient();
 
-  const handleSignout = async (e: React.FormEvent) => {
+  const handleSignOut = async (e: React.FormEvent) => {
     e.preventDefault();
     const { error } = await supabase.auth.signOut();
 
@@ -28,5 +28,5 @@ export const useSignout = () => {
     }
   };
 
-  return { handleSignout };
+  return { handleSignOut };
 };

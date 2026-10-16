@@ -1,6 +1,6 @@
 'use client';
 import browserClient from '@/utils/supabase/client';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import QuizTimer from './_components/QuizTimer';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
@@ -16,6 +16,7 @@ import {
 import CheckingButton from './_components/CheckingButton';
 import QuestionUnderLine from './_components/QuestionUnderLine';
 import { weekNumber } from '@/utils/week/weekNumber';
+import { useIsMobile } from '@/utils/mediaquery/useMediaQuery';
 import { CheckingQuestion, CheckingResult } from '@/types/checking';
 import { Loader2 } from 'lucide-react';
 
@@ -29,20 +30,12 @@ const CheckingQuizPage = () => {
   const allResults = useRef<CheckingResult[]>([]);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [isTimeOver, setIsTimeOver] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useIsMobile();
   const [isAllQuestions, setIsAllQuestions] = useState(false);
   const router = useRouter();
   const insertScoreMutation = useInsertCheckingMutation();
   const updateScoreMutation = useUpdateCheckingMutation();
   const inserCheckingResultMutation = useInsertCheckingResultMutation();
-
-  const handleResize = () => setIsMobile(window.innerWidth <= 750);
-
-  useEffect(() => {
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   const saveResultsToLocalStorage = (results: CheckingResult[]) => {
     localStorage.setItem('checkingQuizResults', JSON.stringify(results));

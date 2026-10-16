@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-type Props = {
+type AvatarProps = {
   src: string | null | undefined;
   size: string | undefined;
   className?: string;
@@ -8,7 +8,7 @@ type Props = {
   style?: React.CSSProperties;
 };
 
-const Avatar = ({ src, size, className, style }: Props) => {
+const Avatar = ({ src, size, className, style }: AvatarProps) => {
   return (
     <div
       className={`relative rounded-full aspect-square overflow-hidden bg-primary-100 bg-cover ${className}`}

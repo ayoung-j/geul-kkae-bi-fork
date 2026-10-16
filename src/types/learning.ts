@@ -1,4 +1,4 @@
-export interface Word {
+export type Word = {
   channel: {
     total: number;
     num: number;
@@ -10,7 +10,7 @@ export interface Word {
     lastbuilddate: string;
   };
 }
-export interface WordItem {
+export type WordItem = {
   word: string;
   sense: [
     {
@@ -24,7 +24,7 @@ export interface WordItem {
   ];
 }
 
-export interface ExtractWordListFromWord {
+export type ExtractWordListFromWord = {
   word: string;
   wordClass: string;
   definition: string;

@@ -30,7 +30,7 @@ const MobileTutorial: React.FC<MobileTutorialProps> = ({ onStartGame }) => {
                 priority
               />
               <button
-                className='start_checking_btn absolute w-[209px] py-[15px] rounded-[80px] bottom-[7.5rem]'
+                className='start-checking-btn absolute w-[209px] py-[15px] rounded-[80px] bottom-[7.5rem]'
                 onClick={onStartGame}
               >
                 <span className='relative z-10 title-20 text-tertiary-p-700'>GAME START</span>

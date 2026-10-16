@@ -6,21 +6,6 @@ import { useAuth } from '@/queries/useAuth';
 import { useRouter } from 'next/navigation';
 import { useRank } from '@/queries/useRank';
 
-export type Rank = {
-  user_id: string;
-  id: string;
-  speaking: string | null;
-  checking: string | null;
-  writing: string | null;
-  total: string | null;
-  ranking: string | null;
-  week: string;
-  created_at: string;
-  user: {
-    nickname: string;
-  };
-};
-
 const MainRank = () => {
   const { data: user } = useAuth();
   const { data: ranks } = useRank(weekCalculate(0));

@@ -7,13 +7,13 @@ import { FieldValues } from 'react-hook-form';
 import DefaultInput from './DefaultInput';
 import { X } from 'lucide-react';
 
-interface Props {
+type EmailInputProps = {
   field: FieldValues;
   domainOptions: string[];
   inputClassName: string;
-}
+};
 
-const EmailInput = ({ field, domainOptions, inputClassName }: Props) => {
+const EmailInput = ({ field, domainOptions, inputClassName }: EmailInputProps) => {
   const [userId, setUserId] = useState('');
   const [domain, setDomain] = useState('');
   const [customDomain, setCustomDomain] = useState('');

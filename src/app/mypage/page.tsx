@@ -9,7 +9,7 @@ const MyPage = async () => {
   const user = await fetchCurrentUser();
 
   if (!user?.id) {
-    redirect('/signin');
+    redirect('/sign-in');
   }
 
   return (

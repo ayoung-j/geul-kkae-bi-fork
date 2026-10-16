@@ -4,12 +4,12 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import Image from 'next/image';
-import { GamesArray, GamesScore, JustEndedGameProp } from '@/types/result';
+import { GamesArray, GamesScore, JustEndedGameProps } from '@/types/result';
 import LineTitle from '@/components/LineTitle';
 import ResultCard from './ResultCard';
 // import Modal from './Modal';
 
-const Guest = ({ searchParams }: JustEndedGameProp) => {
+const Guest = ({ searchParams }: JustEndedGameProps) => {
   const [games, setGames] = useState<GamesArray[]>();
 
   useEffect(() => {

@@ -1,46 +1,120 @@
-.pagination-button {
+.wronganswer-tab-panel {
+  position: relative;
+  width: 100%;
+  height: 44.938rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1.875rem;
+  border-radius: 0 1.25rem 1.25rem 1.25rem;
+}
+.wronganswer-tab-panel ::-webkit-scrollbar {
+  width: 16px;
+}
+.wronganswer-tab-panel ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25); /* 스크롤바 색상 */
+  border-radius: 16px; /* 스크롤바 둥근 테두리 */
+  background-clip: padding-box;
+  border: 6px solid transparent;
+}
+.wronganswer-tab-panel ::-webkit-scrollbar-track {
+  background: transparent; /* 스크롤바 뒷 배경 색상 */
+}
+
+.wronganswer-empty-text {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  padding: 0 3.5rem;
+}
+
+.wronganswer-tab-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  max-width: 56.25rem;
+  margin: auto;
+}
+
+.wronganswer-prev-next {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+.wronganswer-prev,
+.wronganswer-next {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 3.5rem;
   height: 3.5rem;
-  background: url(/icon_speak_wrong_btn.svg);
-  background-size: cover;
+  border-radius: 50%;
+  opacity: 1 !important;
 }
-.pagination-button.prev {
-  left: 1.188rem;
-  transform: translateY(-50%) rotate(180deg);
+.wronganswer-prev {
+  left: 1.125rem;
 }
-.pagination-button.next {
-  right: 1.188rem;
-}
-.pagination-button.next.disable {
-  transform: translateY(-50%) rotate(180deg);
-}
-.pagination-button.disable {
-  background-image: url(/icon_speak_wrong_btn_disable.svg);
-  transform: translateY(-50%) rotate(0);
-  pointer-events: none;
+.wronganswer-next {
+  right: 1.125rem;
 }
 
-.check-label {
-  background: url(/icon_speak_check_disable.svg) no-repeat center;
-  background-size: cover;
-  border-style: none;
-}
-.input-box:checked + label {
-  background-image: url(/icon_speak_check.svg);
+.wronganswer-delete-wrap {
+  width: 100%;
+  text-align: center;
+  padding-top: 1.875rem;
+  margin-top: auto;
 }
 
-.scrollbar-speaking::-webkit-scrollbar {
-  width: 8px;
+@media (max-width: 1100px) {
+  .wronganswer-prev,
+  .wronganswer-next {
+    width: 3rem;
+    height: 3rem;
+  }
 }
-.scrollbar-speaking::-webkit-scrollbar-thumb {
-  background: var(--color-secondary-200); /* 스크롤바 색상 */
-  border-radius: 12px; /* 스크롤바 둥근 테두리 */
-  background-clip: padding-box;
-  border: 1px solid transparent;
+
+@media (max-width: 1024px) {
+  .wronganswer-prev {
+    left: 0;
+  }
+  .wronganswer-next {
+    right: 0;
+  }
 }
-.scrollbar-speaking::-webkit-scrollbar-track {
-  background: transparent; /* 스크롤바 뒷 배경 색상 */
+
+@media (max-width: 768px) {
+  .wronganswer-tab-panel {
+    height: calc(100vh - 6.625rem);
+    padding: 1.5rem 1rem;
+    border-radius: 0 1.25rem 0 0;
+  }
+
+  .wronganswer-tab-content {
+    width: calc(100% + 1rem * 2);
+    margin: 0 -1rem 4.5rem;
+    padding-left: 1rem;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  .wronganswer-prev-next {
+    display: none;
+  }
+
+  .wronganswer-delete-wrap {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 1.5rem 1rem;
+  }
 }

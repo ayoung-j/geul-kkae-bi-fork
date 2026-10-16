@@ -6,14 +6,14 @@ import { redirect } from 'next/navigation';
 import GoogleSignButton from '../_components/GoogleSignButton';
 import KakaoSignButtton from '../_components/KakaoSignButtton';
 import { fetchCurrentUser } from '@/utils/auth/server-action';
-import SigninForm from '../_components/SigninForm';
+import SignInForm from '../_components/SignInForm';
 
 export const metadata: Metadata = {
   title: '로그인',
   description: '로그인',
 };
 
-const SigninPage = async () => {
+const SignInPage = async () => {
   const user = await fetchCurrentUser();
 
   if (user?.id) {
@@ -38,7 +38,7 @@ const SigninPage = async () => {
           </Link>
         </div>
 
-        <SigninForm />
+        <SignInForm />
 
         <div className='mt-16 max-md:mt-11'>
           <div className='line-title mb-8 max-md:mb-6'>
@@ -58,4 +58,4 @@ const SigninPage = async () => {
   );
 };
 
-export default SigninPage;
+export default SignInPage;

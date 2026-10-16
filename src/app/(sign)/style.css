@@ -1,12 +1,12 @@
-.signin-button-group {
+.sign-in-button-group {
   display: flex;
   align-items: center;
 }
-.signin-button-group > li {
+.sign-in-button-group > li {
   position: relative;
   padding: 0 0.75rem;
 }
-.signin-button-group > li:before {
+.sign-in-button-group > li:before {
   content: '';
   position: absolute;
   top: 50%;
@@ -17,10 +17,10 @@
   height: 0.75rem;
   background-color: var(--color-gray-300);
 }
-.signin-button-group > li:first-child:before {
+.sign-in-button-group > li:first-child:before {
   display: none;
 }
-.signin-button-group > li:last-child {
+.sign-in-button-group > li:last-child {
   padding-right: 0;
 }
 

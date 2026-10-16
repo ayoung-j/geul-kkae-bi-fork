@@ -40,7 +40,7 @@ const FindPasswordForm = () => {
             htmlContainer: 'swal-custom-text',
           },
           showConfirmButton: false,
-          footer: `<a href="/signin" class='swal-custom-button'>로그인하기</a>`,
+          footer: `<a href="/sign-in" class='swal-custom-button'>로그인하기</a>`,
         });
       }
 

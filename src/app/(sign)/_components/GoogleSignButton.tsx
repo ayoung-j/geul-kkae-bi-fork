@@ -2,12 +2,12 @@
 
 import Image from 'next/image';
 import Swal from 'sweetalert2';
-import { googleSignin } from '@/utils/auth/client-action';
+import { googleSignIn } from '@/utils/auth/client-action';
 import DefaultButton from '@/components/DefaultButton';
 
 const GoogleSignButton = () => {
-  const handleGoogleSignin = async () => {
-    const result = await googleSignin();
+  const handleGoogleSignIn = async () => {
+    const result = await googleSignIn();
 
     if (result instanceof Error) {
       Swal.fire({
@@ -25,7 +25,7 @@ const GoogleSignButton = () => {
   return (
     <DefaultButton
       className='relative w-full bg-[#F2F2F2] text-gray-700 hover:bg-gray-200 hover:text-gray-700'
-      onClick={handleGoogleSignin}
+      onClick={handleGoogleSignIn}
     >
       <Image
         src='icon_google.svg'

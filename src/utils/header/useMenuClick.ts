@@ -8,11 +8,11 @@ type HandleMenuClickProps = {
   ranks: string[] | null | undefined;
 };
 
-export const useHandleMenuClick = () => {
+export const useMenuClick = () => {
   const router = useRouter();
   const restrictedLink = ['/games/rank', '/games/wronganswer'];
 
-  const handleMenuClick = ({ link, user, ranks }: HandleMenuClickProps): void => {
+  const handleMenuClick = ({ link, user, ranks }: HandleMenuClickProps) => {
     const isLogined = user !== null;
     const isRestrictedLink = restrictedLink.includes(link);
     const isRankPath = link === '/games/rank';
@@ -37,7 +37,7 @@ export const useHandleMenuClick = () => {
         confirmButtonText: '로그인하러가기',
       }).then(async (result) => {
         if (result.isConfirmed) {
-          router.push('/signin');
+          router.push('/sign-in');
         }
       });
 

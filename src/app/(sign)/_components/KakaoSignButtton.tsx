@@ -2,12 +2,12 @@
 
 import Image from 'next/image';
 import Swal from 'sweetalert2';
-import { kakaoSignin } from '@/utils/auth/client-action';
+import { kakaoSignIn } from '@/utils/auth/client-action';
 import DefaultButton from '@/components/DefaultButton';
 
 const KakaoSignButtton = () => {
-  const handleKakaoSignin = async () => {
-    const result = await kakaoSignin();
+  const handleKakaoSignIn = async () => {
+    const result = await kakaoSignIn();
 
     if (result instanceof Error) {
       Swal.fire({
@@ -25,7 +25,7 @@ const KakaoSignButtton = () => {
   return (
     <DefaultButton
       className='relative w-full bg-[#FDDC3F] text-gray-700 hover:bg-[#DCB707] hover:text-gray-700'
-      onClick={handleKakaoSignin}
+      onClick={handleKakaoSignIn}
     >
       <Image
         src='icon_kakao.svg'

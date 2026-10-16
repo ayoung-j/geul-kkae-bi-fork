@@ -48,7 +48,7 @@ const QuizTimer: React.FC<QuizTimerProps> = ({ onTimeOver, isAllQuestions, isMob
               priority
             />
             <button
-              className='start_checking_btn absolute bottom-[4.375rem] right-[62px] w-[13.063rem] py-[15px] rounded-[80px]'
+              className='start-checking-btn absolute bottom-[4.375rem] right-[62px] w-[13.063rem] py-[15px] rounded-[80px]'
               onClick={handleStartGame}
             >
               <span className='relative z-10 title-20 text-tertiary-p-700'>GAME START</span>
@@ -61,7 +61,9 @@ const QuizTimer: React.FC<QuizTimerProps> = ({ onTimeOver, isAllQuestions, isMob
           className={`bg-tertiary-p-300 ${isMobile ? 'h-[14px]' : 'h-7'} transition-all ease-linear rounded-r-lg`}
           style={{ width: `${(timeLeft / 40) * 100}%`, transitionDuration: '1s' }}
         ></div>
-        {isMobile && <p className='self-center font-yangjin text-base font-medium mx-[0.625rem] mt-2 mb-2'>{`${currentQuizIndex + 1}/10`}</p>}
+        {isMobile && (
+          <p className='self-center font-yangjin text-base font-medium mx-[0.625rem] mt-2 mb-2'>{`${currentQuizIndex + 1}/10`}</p>
+        )}
       </div>
     </div>
   );

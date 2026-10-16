@@ -29,12 +29,12 @@ const HEADER_DATA: { [key: string]: HeaderData } = {
     ...commonStyle,
     title: '홈',
   },
-  '/signin': {
+  '/sign-in': {
     ...commonStyle,
     title: '로그인',
     pcVisible: 'hidden',
   },
-  '/signup': {
+  '/sign-up': {
     ...commonStyle,
     title: '회원가입',
   },
@@ -111,8 +111,8 @@ const Header = () => {
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const hamburgerBtnRef = useRef<HTMLDivElement>(null);
   const backPaths = [
-    '/signin',
-    '/signup',
+    '/sign-in',
+    '/sign-up',
     '/find-password',
     '/change-password',
     '/games/speaking',

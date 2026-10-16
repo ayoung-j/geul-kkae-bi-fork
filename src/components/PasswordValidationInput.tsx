@@ -7,14 +7,19 @@ import { Check, X } from 'lucide-react';
 import { FieldValues } from 'react-hook-form';
 import DefaultInput from './DefaultInput';
 
-interface Props {
+type PasswordValidationInputProps = {
   field: FieldValues;
   placeholder: string;
   inputClassName?: string | null;
   buttonClassName?: string | null;
-}
+};
 
-const PasswordValidationInput = ({ field, placeholder, inputClassName, buttonClassName }: Props) => {
+const PasswordValidationInput = ({
+  field,
+  placeholder,
+  inputClassName,
+  buttonClassName,
+}: PasswordValidationInputProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const [validations, setValidations] = useState({
     minLength: false,

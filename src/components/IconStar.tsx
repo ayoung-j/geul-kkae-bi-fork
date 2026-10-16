@@ -1,8 +1,8 @@
-interface Props {
+type IconStarProps = {
   className?: string | null;
-}
+};
 
-const IconStar = ({ className }: Props) => {
+const IconStar = ({ className }: IconStarProps) => {
   return (
     <svg
       width='14'

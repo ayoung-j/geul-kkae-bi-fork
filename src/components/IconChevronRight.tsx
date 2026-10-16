@@ -1,7 +1,8 @@
-interface Props {
+type IconChevronRightProps = {
   className?: string | null;
-}
-const IconChevronRight = ({ className }: Props) => {
+};
+
+const IconChevronRight = ({ className }: IconChevronRightProps) => {
   return (
     <svg
       width='12'

@@ -1,9 +1,5 @@
 import Image from 'next/image';
-
-type GameInfo = {
-  GameScore: string | undefined;
-  justEndedGame: string | undefined;
-};
+import { ResultSideProps } from '@/types/result';
 
 const getScoreImage = (score: number) => {
   if (score >= 90) {
@@ -31,7 +27,7 @@ const getScoreGame = (justEndedGame: string) => {
   }
 };
 
-const ResultSide = ({ GameScore, justEndedGame }: GameInfo) => {
+const ResultSide = ({ GameScore, justEndedGame }: ResultSideProps) => {
   GameScore = GameScore ?? '0';
   justEndedGame = justEndedGame ?? '';
 

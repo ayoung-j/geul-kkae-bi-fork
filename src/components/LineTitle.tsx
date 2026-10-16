@@ -1,10 +1,10 @@
-interface Props {
+type LineTitleProps = {
   children: React.ReactNode;
   className?: string | null;
   lineClassName?: string | null;
 }
 
-const LineTitle = ({ children, className, lineClassName }: Props) => {
+const LineTitle = ({ children, className, lineClassName }: LineTitleProps) => {
   return (
     <div className={`relative inline-flex font-bold leading-none ${className || ''}`}>
       <div className='relative z-10 inline-flex items-center'>{children}</div>
