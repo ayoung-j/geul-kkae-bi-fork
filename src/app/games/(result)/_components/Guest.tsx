@@ -40,7 +40,7 @@ const Guest = ({ searchParams }: JustEndedGameProps) => {
         {
           type: 'writing',
           score: writingScore,
-          name: '빈칸 한입',
+          name: '빈칸 한 입',
           backgroundColor: 'bg-tertiary-g-100 max-md:bg-tertiary-g-100',
           titleColor1: 'text-tertiary-g-800',
           titleColor2: 'text-tertiary-g-600',

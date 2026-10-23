@@ -2,14 +2,14 @@
 import React from 'react';
 import { WrongAnswerTabProps } from '@/types/wronganswer';
 
-const WrongAnswerTab = ({ tab, selectedTab, onClick }: Partial<WrongAnswerTabProps>) => {
+const WrongAnswerTab = ({ tab, selectedTab, onClick }: WrongAnswerTabProps) => {
   return (
     <button
       key={tab?.id}
       className={`relative flex justify-center items-center w-[11.375rem] h-[3.875rem] text-center font-yangjin max-md:w-full max-md:max-w-[8.125rem] max-md:h-[2.75rem] ${
         selectedTab === tab?.id
-          ? `z-10 title-24 text-${tab?.primaryColor} max-md:text-base`
-          : `top-[10px] title-20 text-${tab?.primaryLightColor} max-md:text-xs`
+          ? `z-10 title-24 ${tab?.primaryTextColor} max-md:text-base`
+          : `top-[10px] title-20 ${tab?.primaryLightTextColor} max-md:text-xs`
       }`}
       onClick={onClick}
     >
@@ -27,7 +27,7 @@ const WrongAnswerTab = ({ tab, selectedTab, onClick }: Partial<WrongAnswerTabPro
       </svg>
 
       <p
-        className={`relative ml-[-2px] ${selectedTab === tab?.id ? `text-${tab?.secondaryColor}` : `text-${tab?.secondaryLightColor} mt-[-10px]`}`}
+        className={`relative ml-[-2px] ${selectedTab === tab?.id ? `${tab?.secondaryTextColor}` : `${tab?.secondaryLightTextColor} mt-[-10px]`}`}
       >
         {tab?.title}
       </p>

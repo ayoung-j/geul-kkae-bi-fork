@@ -7,15 +7,15 @@ const WrongAnswerComponent = ({ tab }: WrongAnswerComponentProps) => {
   const SelectedComponent = tab.component;
 
   return (
-    <div className={`wronganswer-tab-panel bg-${tab.primaryColor}`}>
+    <div className={`wronganswer-tab-panel ${tab.primaryBgColor}`}>
       <Suspense fallback={<Loader2 className='mr-2 h-4 w-4 animate-spin' />}>
         <div className='text-center mb-6'>
           <div className='flex items-center justify-center'>
-            <strong className={`text-${tab.secondaryColor} title-24 max-md:title-16`}>
+            <strong className={`${tab.secondaryTextColor} title-24 max-md:title-16`}>
               완료한 문장은 체크해서 지워주세요!
             </strong>
             <Check
-              className={`text-${tab.contentPointColor} w-[2.375rem] h-[2.375rem] -mt-1 ml-1 -mr-5 max-md:w-6 max-md:h-6 max-md:-mr-3`}
+              className={`${tab.contentPointTextColor} w-[2.375rem] h-[2.375rem] -mt-1 ml-1 -mr-5 max-md:w-6 max-md:h-6 max-md:-mr-3`}
               style={{ strokeWidth: '3px' }}
             />
           </div>

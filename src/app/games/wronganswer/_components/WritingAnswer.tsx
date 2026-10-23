@@ -48,7 +48,7 @@ const WritingAnswer = ({ tab }: WrongAnswerComponentProps) => {
     <>
       {!wrongAnswersData || wrongAnswersData.length === 0 ? (
         <div className='wronganswer-empty-text'>
-          <p className={`title-34 text-${tab.secondaryLightColor} max-md:title-24`}>오답이 아직 모이지 않았어요!</p>
+          <p className={`title-34 ${tab.secondaryLightTextColor} max-md:title-24`}>오답이 아직 모이지 않았어요!</p>
         </div>
       ) : (
         <>
@@ -60,7 +60,7 @@ const WritingAnswer = ({ tab }: WrongAnswerComponentProps) => {
                   key={index}
                   className='flex flex-col justify-between bg-white rounded-2xl overflow-hidden'
                 >
-                  <div className={`min-h-[3.5rem] border-b-[0.188rem] border-${tab.contentPrimaryColor}`}>
+                  <div className={`min-h-[3.5rem] border-b-[0.188rem] ${tab.contentPrimaryBorderColor}`}>
                     <div className='flex justify-between items-center h-full px-4 py-1 border-b-[0.188rem] border-tertiary-g-200'>
                       <div className='flex items-center gap-[0.625rem]'>
                         <Badge
@@ -99,7 +99,7 @@ const WritingAnswer = ({ tab }: WrongAnswerComponentProps) => {
                   <div className='flex justify-center items-center gap-9 px-4 py-3 max-md:gap-6'>
                     <div className='flex flex-col justify-center items-center gap-2'>
                       <Badge
-                        className={`h-[2rem] text-lg font-bold rounded-lg px-[0.875rem] py-0 bg-${tab.contentSecondaryColor} text-tertiary-g-800 hover:bg-${tab.contentSecondaryColor} max-md:h-7 max-md:text-base`}
+                        className={`h-[2rem] text-lg font-bold rounded-lg px-[0.875rem] py-0 ${tab.contentSecondaryBgColor} text-tertiary-g-800 hover:${tab.contentSecondaryBgColor} max-md:h-7 max-md:text-base`}
                       >
                         키워드
                       </Badge>
@@ -109,7 +109,7 @@ const WritingAnswer = ({ tab }: WrongAnswerComponentProps) => {
                       {answer.answer?.split('').map((char: string, index: number) => (
                         <span
                           key={index}
-                          className={`flex items-center justify-center w-16 h-16 text-4xl font-bold bg-${tab.contentPrimaryColor} rounded-lg max-md:w-12 max-md:h-12 max-md:text-2xl`}
+                          className={`flex items-center justify-center w-16 h-16 text-4xl font-bold ${tab.contentPrimaryBgColor} rounded-lg max-md:w-12 max-md:h-12 max-md:text-2xl`}
                         >
                           {char}
                         </span>
@@ -117,10 +117,10 @@ const WritingAnswer = ({ tab }: WrongAnswerComponentProps) => {
                     </div>
                   </div>
                   <div
-                    className={`flex flex-col justify-center items-center gap-2 px-4 py-3 bg-${tab.contentPrimaryColor}`}
+                    className={`flex flex-col justify-center items-center gap-2 px-4 py-3 ${tab.contentPrimaryBgColor}`}
                   >
                     <p className='text-xl font-bold text-center leading-tight max-md:text-base'>{answer.question}</p>
-                    <p className={`text-base font-medium leading-tight text-${tab.contentPointColor} max-md:text-sm`}>
+                    <p className={`text-base font-medium leading-tight ${tab.contentPointTextColor} max-md:text-sm`}>
                       ***{answer.meaning}
                     </p>
                   </div>
@@ -140,7 +140,7 @@ const WritingAnswer = ({ tab }: WrongAnswerComponentProps) => {
           />
 
           {/* 삭제 버튼 */}
-          <div className={`wronganswer-delete-wrap ${tab.primaryColor}`}>
+          <div className={`wronganswer-delete-wrap ${tab.primaryBgColor}`}>
             <DefaultButton
               disabled={selectedQuestions.length === 0}
               className={`w-full max-w-[21.875rem] text-lg font-bold max-md:max-w-none ${tab.buttonColor} ${tab.buttonDisabledColor}`}

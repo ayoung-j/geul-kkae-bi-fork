@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { ModalProps } from '@/types/result';
+import { GameModalProps } from '@/types/result';
 import { PartialQuestion } from '@/types/writing';
-import Image from 'next/image';
+import { ChevronDown, Circle, X } from 'lucide-react';
+import DefaultButton from '@/components/DefaultButton';
+import { Badge } from '@/components/ui/badge';
 
-const ModalWriting = ({ handleCloseModal }: ModalProps) => {
+const ModalWriting = ({ game }: GameModalProps) => {
   const [result, setResult] = useState<PartialQuestion[]>([]);
   const [openResult, setOpenResult] = useState<number | null>(null);
 
@@ -13,95 +15,94 @@ const ModalWriting = ({ handleCloseModal }: ModalProps) => {
   }, []);
 
   return (
-    <div className='w-[1002px] h-[792px] rounded-[1.25rem] bg-[#7fe6cf] flex flex-col items-center max-md:w-[358px] max-md:h-[768px] md:rounded-[3.125rem]'>
-      <h2 className='mt-12 title-40 max-md:mt-8 max-md:text-[1.5rem] max-md:font-medium'>
-        <span className='text-[#22AA8D]'>빈칸 한 입</span> <span className='text-[#198069]'>오답 공개</span>
-      </h2>
-      <p className='hidden max-md:block mt-2 body-24 max-md:caption-14 max-md:mt-0'>
-        오답은 <span className='text-[#22AA8D]'>오답모아 페이지</span> 에서 다시 확인하실 수 있습니다.
-      </p>
-      <div className='flex justify-center items-start max-md:w-full max-md:px-4'>
-        <ul className='mt-[1.188rem] md:mt-8 w-[836px] h-[559px] overflow-auto max-md:w-full max-md:h-[620px] scrollbar-tertiary-g pr-[16px] mr-[-16px] max-md:pr-[9px] max-md:mr-[-11px]'>
-          {result.map((result, index) => (
-            <li
-              key={result.test}
-              className='mb-4 max-md:mb-2'
-            >
-              <div className='flex justify-between items-center h-[45px] md:h-[87px] px-8 py-4 rounded-[0.5rem] mb-2 bg-[#F6FDFC] max-md:px-3 max-md:py-2 max-md:h-auto'>
-                <div className='flex items-center max-md:flex-row max-md:items-center max-md:gap-2 max-md:h-[45px]'>
-                  <p className='title-32 font-medium text-[#115546] md:text-[#363635] mr-[2.688rem] max-md:mr-0 max-md:text-[1.25rem]'>
-                    {String(index + 1).padStart(2, '0')}번
-                  </p>
-                  <span className='h-[2.5rem] border-l-[3px] border-[#AAEEDF] mr-[1.188rem] max-md:mr-0 max-md:ml-0 max-md:hidden'></span>
-                  <p className='text-[2rem] font-medium text-[#363635] max-md:text-base'>{result.userAnswer}</p>
-                  <img
-                    src={result.isCorrect ? '/icon_correctanswer_modal.svg' : '/icon_wronganswer_modal.svg'}
-                    alt={result.isCorrect ? 'correctanswer' : 'wronganswer'}
-                    className='ml-[14px] max-md:ml-2 max-md:w-[24px] max-md:h-[24px]'
-                  />
-                </div>
-                <button
-                  onClick={() => setOpenResult(openResult === index ? null : index)}
-                  className='flex items-center px-3 py-[0.188rem] md:px-6 md:py-1 text-2xl text-[#F6FDFC] bg-[#22AA8D] rounded-[0.5rem] max-md:text-[1rem] max-md:px-3 max-md:py-1'
-                >
-                  정답 확인
-                  <img
-                    src='/icon_btn_modal.svg'
-                    alt='button icon'
-                    className='ml-[14px] max-md:ml-2 max-md:w-3 max-md:h-3'
-                  />
-                </button>
-              </div>
-
-              {openResult === index && (
-                <div className=' h-[18.938rem] mb-4 max-md:h-auto'>
-                  <div className='bg-[#D4F7EF] p-8 rounded-t-[0.5rem] mb-[0.188rem] max-md:p-4 max-md:flex max-md:flex-col max-md:justify-center max-md:items-center'>
-                    <div className='flex items-center mb-[1.063rem] gap-[1.438rem] max-md:gap-4 max-md:justify-center'>
-                      <span className='px-4 py-[0.125rem] text-2xl font-semibold text-[#115546] bg-[#2AD4AF] rounded-lg max-md:text-[1rem] max-md:hidden'>
-                        키워드
-                      </span>
-                      <p className='text-[1.875rem] text-[#504F4E] font-bold max-md:text-3xl'>{result.keyword}</p>
-                    </div>
-                    <div className='flex flex-col items-start max-md:items-center'>
-                      <div className='flex items-center gap-[2.688rem] max-md:gap-2 max-md:justify-center'>
-                        <span className='px-4 py-[0.125rem] text-2xl font-semibold text-[#115546] bg-[#2AD4AF] rounded-lg max-md:text-[1rem] max-md:hidden'>
-                          예시
-                        </span>
-                        <p className='text-[1.875rem] text-[#504F4E] font-bold max-md:text-[1rem]'>{result.test}</p>
-                      </div>
-                      <p className='text-[#22AA8D] text-[20px] ml-[117px] max-md:ml-0 max-md:mt-2 max-md:text-[0.875rem]'>
-                        ***{result.meaning}
-                      </p>
-                    </div>
-                  </div>
-                  <div>
-                    <div className='flex items-center p-8 bg-[#D4F7EF] border-t-[2px] border-t-white rounded-b-[0.5rem] max-md:p-4'>
-                      <span className='px-4 py-[0.125rem] text-2xl font-semibold text-[#FFF] bg-[#22AA8D] rounded-lg mr-[2.625rem] max-md:mr-3 max-md:text-sm'>
-                        정답
-                      </span>
-                      <p className='text-[1.875rem] font-bold text-[#504F4E] max-md:text-[1rem]'>{result.answer}</p>
-                    </div>
-                  </div>
-                </div>
+    <ul className={`modal-wronganswer-list ${game.id}`}>
+      {result.map((result, index) => (
+        <li key={result.test}>
+          <div className='modal-wronganswer-card'>
+            <div className='modal-wronganswer-number text-tertiary-g-800 before:bg-tertiary-g-200'>
+              {String(index + 1).padStart(2, '0')}번
+            </div>
+            <div className='modal-wronganswer-title'>
+              <span>{result.userAnswer}</span>
+              {result.isCorrect ? (
+                <Circle
+                  className='w-8 h-8 shrink-0 text-primary-400 ml-3 max-md:w-5 max-md:h-5 max-md:ml-1'
+                  style={{ strokeWidth: '2.5' }}
+                />
+              ) : (
+                <X
+                  className='w-9 h-9 shrink-0 text-warning-400 ml-3 max-md:w-6 max-md:h-6 max-md:ml-1'
+                  style={{ strokeWidth: '2.5' }}
+                />
               )}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <button
-        className='absolute right-[2.5rem] top-[2.25rem] max-md:right-4 max-md:top-4'
-        onClick={handleCloseModal}
-      >
-        <Image
-          src='/icon_close_write.svg'
-          width={48}
-          height={48}
-          alt='모달 닫기'
-          className='max-md:w-6 max-md:h-6'
-          priority
-        ></Image>
-      </button>
-    </div>
+            </div>
+            <div className='modal-wronganswer-detail'>
+              <DefaultButton
+                className='h-[3rem] px-6 text-2xl font-normal font-yangjin bg-tertiary-g-600 text-tertiary-g-50 hover:bg-tertiary-g-500 hover:text-tertiary-g-50 [&_svg]:size-8 [&_svg]:-mr-[0.375rem] [&_svg]:text-tertiary-g-200 [&_svg]:hover:text-tertiary-g-200 max-md:h-[1.75rem] max-md:px-3 max-md:text-xs max-md:[&_svg]:size-4 max-md:[&_svg]:-mr-[0.25rem]'
+                onClick={() => setOpenResult(openResult === index ? null : index)}
+              >
+                <div className='pt-[0.125rem]'>정답 확인</div>
+                <ChevronDown
+                  className={`${openResult === index && 'rotate-180'}`}
+                  style={{ strokeWidth: '3' }}
+                />
+              </DefaultButton>
+            </div>
+          </div>
+
+          {/* 문제 상세 */}
+          {openResult === index && (
+            <div className='modal-wronganswer-content bg-tertiary-g-100'>
+              <div className='modal-wronganswer-content-top border-tertiary-g-300'>
+                <div className='flex'>
+                  <div className='w-[7.125rem] max-md:hidden'>
+                    <Badge
+                      className={`h-10 px-4 text-2xl rounded-lg bg-tertiary-g-500 text-tertiary-g-800 hover:bg-tertiary-g-500 max-md:h-6 max-md:text-sm`}
+                    >
+                      키워드
+                    </Badge>
+                  </div>
+                  <div className='w-[min-content] flex-auto'>
+                    <div className='body-30 leading-tight text-gray-700 max-md:text-center'>{result.keyword}</div>
+                  </div>
+                </div>
+                <div className='flex mt-4 max-md:mt-3'>
+                  <div className='w-[7.125rem] max-md:hidden'>
+                    <Badge
+                      className={`h-10 px-4 text-2xl rounded-lg bg-tertiary-g-500 text-tertiary-g-800 hover:bg-tertiary-g-500 max-md:h-6 max-md:text-sm`}
+                    >
+                      예시
+                    </Badge>
+                  </div>
+                  <div className='w-[min-content] flex-auto'>
+                    <div className='body-30 leading-tight text-gray-700 max-md:text-base max-md:text-center'>
+                      {result.test}
+                    </div>
+                    <div className='text-xl font-medium text-tertiary-g-600 mt-[0.375rem] max-md:text-sm max-md:text-center'>
+                      ***{result.meaning}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className='modal-wronganswer-content-bottom border-tertiary-g-50'>
+                <div className='flex items-center'>
+                  <div className='w-[7.125rem] leading-none max-md:w-14'>
+                    <Badge
+                      className={`h-10 px-4 text-2xl rounded-lg bg-tertiary-g-600 text-white hover:bg-tertiary-g-600 max-md:h-[1.375rem]  max-md:px-[0.625rem] max-md:rounded-sm max-md:text-xs`}
+                    >
+                      정답
+                    </Badge>
+                  </div>
+                  <div className='w-[min-content] flex-auto'>
+                    <div className='body-30 leading-tight text-gray-700 max-md:text-base'>{result.answer}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </li>
+      ))}
+    </ul>
   );
 };
 

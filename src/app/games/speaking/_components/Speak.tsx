@@ -45,7 +45,7 @@ const Speak = () => {
   };
 
   const getWrongAnswer = () => {
-    if (percent < 30) {
+    if (percent <= 30) {
       setWrongAnswer((prevQuestion) =>
         !prevQuestion.some((item) => item.text === randomText[index])
           ? [...prevQuestion, { text: randomText[index], score: percent }]
@@ -94,6 +94,10 @@ const Speak = () => {
       setIsGame(false);
     };
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('speakingResult', JSON.stringify(wrongAnswer));
+  }, [wrongAnswer]);
 
   const startRecording = () => {
     if (!mediaRecorderRef.current) {

@@ -48,7 +48,7 @@ const CheckingAnswer = ({ tab }: WrongAnswerComponentProps) => {
     <>
       {!wrongAnswersData || wrongAnswersData.length === 0 ? (
         <div className='wronganswer-empty-text'>
-          <p className={`title-34 text-${tab.secondaryLightColor} max-md:title-24`}>오답이 아직 모이지 않았어요!</p>
+          <p className={`title-34 ${tab.secondaryLightTextColor} max-md:title-24`}>오답이 아직 모이지 않았어요!</p>
         </div>
       ) : (
         <>
@@ -65,7 +65,7 @@ const CheckingAnswer = ({ tab }: WrongAnswerComponentProps) => {
                     {/* 문제 헤더 */}
                     <div className='flex justify-between items-center mb-3'>
                       <Badge
-                        className={`h-[2rem] text-lg font-bold rounded-lg px-[0.875rem] py-0 bg-${tab.contentPrimaryColor} text-${tab.contentPointColor} hover:bg-${tab.contentPrimaryColor} max-md:h-6 max-md:text-sm`}
+                        className={`h-[2rem] text-lg font-bold rounded-lg px-[0.875rem] py-0 ${tab.contentPrimaryBgColor} ${tab.contentPointTextColor} hover:${tab.contentPrimaryBgColor} max-md:h-6 max-md:text-sm`}
                       >
                         문제
                       </Badge>
@@ -104,13 +104,13 @@ const CheckingAnswer = ({ tab }: WrongAnswerComponentProps) => {
                               answer.user_answer === option
                                 ? 'bg-warning-50'
                                 : option === answer.answer
-                                  ? `bg-${tab.contentPrimaryColor}`
+                                  ? `${tab.contentPrimaryBgColor}`
                                   : 'bg-tertiary-p-50'
                             }`}
                           >
                             {/* 번호 표시 */}
                             <span
-                              className={`flex items-center justify-center w-7 h-7 rounded-full text-[1.25rem] font-semibold mr-2 text-white bg-${tab.contentSecondaryColor} max-md:w-6 max-md:h-6 max-md:text-base`}
+                              className={`flex items-center justify-center w-7 h-7 rounded-full text-[1.25rem] font-semibold mr-2 text-white ${tab.contentSecondaryBgColor} max-md:w-6 max-md:h-6 max-md:text-base`}
                             >
                               {index + 1}
                             </span>
@@ -118,7 +118,7 @@ const CheckingAnswer = ({ tab }: WrongAnswerComponentProps) => {
                             <span className='text-2xl font-semibold max-md:text-base'>{option}</span>
                             {answer.user_answer !== option && option === answer.answer && (
                               <Circle
-                                className={`w-[1.125rem] h-[1.125rem] text-${tab.contentPointColor} ml-auto -mr-[0.125rem] max-md:w-4 max-md:h-4 max-md:-mr-1`}
+                                className={`w-[1.125rem] h-[1.125rem] ${tab.contentPointTextColor} ml-auto -mr-[0.125rem] max-md:w-4 max-md:h-4 max-md:-mr-1`}
                                 style={{ strokeWidth: '2.5' }}
                               />
                             )}
@@ -135,11 +135,11 @@ const CheckingAnswer = ({ tab }: WrongAnswerComponentProps) => {
 
                   {/* 정답 해설 */}
                   <div
-                    className={`w-full min-h-[7.125rem] px-5 py-[1.125rem] mt-auto bg-${tab.contentPrimaryColor} max-md:min-h-[auto] max-md:px-4 max-md:py-3`}
+                    className={`w-full min-h-[7.125rem] px-5 py-[1.125rem] mt-auto ${tab.contentPrimaryBgColor} max-md:min-h-[auto] max-md:px-4 max-md:py-3`}
                   >
                     <div className='flex items-center mb-[0.625rem]'>
                       <Badge
-                        className={`h-[2rem] text-lg font-bold rounded-lg px-[0.875rem] py-0 bg-${tab.contentSecondaryColor} text-white hover:bg-${tab.contentSecondaryColor} max-md:h-6 max-md:text-sm`}
+                        className={`h-[2rem] text-lg font-bold rounded-lg px-[0.875rem] py-0 ${tab.contentSecondaryBgColor} text-white hover:${tab.contentSecondaryBgColor} max-md:h-6 max-md:text-sm`}
                       >
                         정답해설
                       </Badge>
@@ -147,7 +147,7 @@ const CheckingAnswer = ({ tab }: WrongAnswerComponentProps) => {
                     <div className='flex items-center'>
                       {/* 정답 인덱스 */}
                       <span
-                        className={`flex items-center justify-center w-7 h-7 rounded-full text-[1.25rem] font-semibold mr-2 text-white bg-${tab.contentSecondaryColor} max-md:w-[1.375rem] max-md:h-[1.375rem] max-md:text-base`}
+                        className={`flex items-center justify-center w-7 h-7 rounded-full text-[1.25rem] font-semibold mr-2 text-white ${tab.contentSecondaryBgColor} max-md:w-[1.375rem] max-md:h-[1.375rem] max-md:text-base`}
                       >
                         {Array.isArray(answer.correct)
                           ? answer.correct.findIndex((opt: string) => opt === answer.answer) + 1
@@ -159,7 +159,7 @@ const CheckingAnswer = ({ tab }: WrongAnswerComponentProps) => {
                           {answer.answer}
                         </span>
                         {/* 화살표 및 해설 */}
-                        <span className={`text-2xl font-semibold text-${tab.contentSecondaryColor} max-md:text-base`}>
+                        <span className={`text-2xl font-semibold ${tab.contentSecondaryTextColor} max-md:text-base`}>
                           →
                         </span>
                         <span className='text-2xl font-semibold text-tertiary-p-600 underline decoration-tertiary-p-200 decoration-[0.75rem] underline-offset-[-0.25rem] max-md:text-base'>
@@ -184,7 +184,7 @@ const CheckingAnswer = ({ tab }: WrongAnswerComponentProps) => {
           />
 
           {/* 삭제 버튼 */}
-          <div className={`wronganswer-delete-wrap ${tab.primaryColor}`}>
+          <div className={`wronganswer-delete-wrap ${tab.primaryBgColor}`}>
             <DefaultButton
               disabled={selectedQuestions.length === 0}
               className={`w-full max-w-[21.875rem] text-lg font-bold max-md:max-w-none ${tab.buttonColor} ${tab.buttonDisabledColor}`}

@@ -1,3 +1,5 @@
+import { ComponentType } from 'react';
+
 export type JustEndedGameProps = {
   searchParams: { [key: string]: string | undefined };
 };
@@ -41,8 +43,18 @@ export type ResultCardProps = {
   nickname: string | undefined;
 };
 
-export type ModalProps = {
-  handleCloseModal: () => void;
+export type GameModalData = {
+  id: string;
+  title: string;
+  defaultBgColor: string;
+  primaryTextColor: string;
+  secondaryTextColor: string;
+  scrollColor: string;
+  component: ComponentType<GameModalProps>;
+};
+
+export type GameModalProps = {
+  game: GameModalData;
 };
 
 export type ResultSideProps = {

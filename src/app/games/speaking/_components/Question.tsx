@@ -1,21 +1,21 @@
 'use client';
-import { useInsertMutation, useInsertResultMutation, useUpdateMutation } from '@/mutations/speek-mutation';
-import { useAuth } from '@/queries/useAuth';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
 import Timer from './Timer';
-import { useGetSpeekDataUser } from '@/queries/useGetSpeekQuery';
-import Image from 'next/image';
+import { useInsertMutation, useInsertResultMutation, useUpdateMutation } from '@/mutations/speak-mutation';
+import { useAuth } from '@/queries/useAuth';
+import { useGetSpeakDataUser } from '@/queries/useGetSpeakQuery';
 import { weekNumber } from '@/utils/week/weekNumber';
 import { useSpeakStore } from '@/store/speakStore';
 import { useTimeStore } from '@/store/timeStore';
-import { SpeekResult } from '@/types/speeking';
+import { SpeakResult } from '@/types/speaking';
 import { throttle } from 'lodash';
+import IconArrowRight from '@/components/IconArrowRight';
 
 type QuestionProps = {
   text: string;
   randomText: string[];
-  wrongAnswer: SpeekResult[];
+  wrongAnswer: SpeakResult[];
   getWrongAnswer: () => void;
 };
 
@@ -40,7 +40,7 @@ const Question = ({ text, randomText, wrongAnswer, getWrongAnswer }: QuestionPro
   const { mutate: insert } = useInsertMutation();
   const { mutate: update } = useUpdateMutation();
   const { mutate: insertResult } = useInsertResultMutation();
-  const { data: game } = useGetSpeekDataUser(data?.id, weekNumber);
+  const { data: game } = useGetSpeakDataUser(data?.id, weekNumber);
   const [finalPercent, setFinalPercent] = useState(0);
 
   useEffect(() => {
@@ -114,8 +114,6 @@ const Question = ({ text, randomText, wrongAnswer, getWrongAnswer }: QuestionPro
           weekNumber: weekNumber,
           score: percent,
         });
-      const dataAnswer = JSON.stringify(wrongAnswer);
-      localStorage.setItem('speakingResult', dataAnswer);
       localStorage.setItem('lastGameType', 'speaking');
     }, 2000),
     [wrongAnswer, insertResult],
@@ -156,51 +154,42 @@ const Question = ({ text, randomText, wrongAnswer, getWrongAnswer }: QuestionPro
           </div>
         </>
       ) : (
-        <>
-          <div className='bg-[#fff] font-bold mt-8 w-[800px] h-[170px] flex-cols justify-center rounded-[30px] max-md:w-full max-md:mt-[1.313rem] max-md:h-[100px]'>
-            {!isLoading ? (
-              <>
-                <div className='text-center'>
-                  <p className='leading-normal text-[36px] text-gray-600 max-md:text-[16px]'>정확도</p>
-                  <p className='leading-[1.35] text-[56px] text-primary-400 max-md:text-[32px]'>
-                    {percent}
-                    <span className='text-[36px] max-md:text-[16px]'>%</span>
-                  </p>
-                </div>
-                <div className='absolute right-[30px] flex-cols top-[40%] max-md:bottom-3.5 max-md:right-1/2 max-md:translate-x-1/2 max-md:top-[auto]'>
-                  <p className='text-[1.5rem] max-md:hidden'>{index + 1}/10</p>
-                  <button
-                    className='mt-[16px] max-md:w-[22.375Rem] max-md:bg-secondary-300 max-md:py-3 max-md:rounded-[8px]'
-                    onClick={handleNextButton}
-                  >
-                    <span className='md:hidden title-16 '>다음</span>
-                    <Image
-                      src='/icon_speak_next_btn.svg'
-                      width={30}
-                      height={30}
-                      alt='다음'
-                      className='max-md:hidden'
-                      priority
-                    ></Image>
-                  </button>
-                </div>
-              </>
-            ) : (
-              <>
-                {isRecording ? (
-                  <p className='text-[36px] text-gray-600 max-md:text-[16px]'>녹음 중입니다</p>
-                ) : (
-                  <p className='text-[36px] text-gray-600 max-md:text-[16px]'>
-                    녹음이 완료되었습니다<br></br> 정확도를 측정중입니다.
-                  </p>
-                )}
-                <div className='absolute right-[30px] max-md:hidden'>
-                  <p>{index + 1}/10</p>
-                </div>
-              </>
-            )}
-          </div>
-        </>
+        <div className='bg-[#fff] font-bold mt-8 w-[800px] h-[170px] flex-cols justify-center rounded-[30px] max-md:w-full max-md:mt-[1.313rem] max-md:h-[100px]'>
+          {!isLoading ? (
+            <>
+              <div className='text-center'>
+                <p className='leading-normal text-[36px] text-gray-600 max-md:text-[16px]'>정확도</p>
+                <p className='leading-[1.35] text-[56px] text-primary-400 max-md:text-[32px]'>
+                  {percent}
+                  <span className='text-[36px] max-md:text-[16px]'>%</span>
+                </p>
+              </div>
+              <div className='absolute right-[30px] flex-cols top-[40%] max-md:bottom-3.5 max-md:right-1/2 max-md:translate-x-1/2 max-md:top-[auto]'>
+                <p className='text-[1.5rem] max-md:hidden'>{index + 1}/10</p>
+                <button
+                  className='mt-[16px] max-md:w-[22.375Rem] max-md:bg-secondary-300 max-md:py-3 max-md:rounded-[8px]'
+                  onClick={handleNextButton}
+                >
+                  <IconArrowRight className='w-8 h-8 text-secondary-400 max-md:hidden' />
+                  <span className='md:hidden title-16'>다음</span>
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              {isRecording ? (
+                <p className='text-[36px] text-gray-600 max-md:text-[16px]'>녹음 중입니다</p>
+              ) : (
+                <p className='text-[36px] text-gray-600 max-md:text-[16px]'>
+                  녹음이 완료되었습니다<br></br> 정확도를 측정중입니다.
+                </p>
+              )}
+              <div className='absolute right-[30px] max-md:hidden'>
+                <p>{index + 1}/10</p>
+              </div>
+            </>
+          )}
+        </div>
       )}
     </>
   );

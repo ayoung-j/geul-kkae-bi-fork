@@ -5,7 +5,7 @@ import { useAuth } from '@/queries/useAuth';
 import { useGetWrongAnswer } from '@/queries/useGetWrongAnswer';
 import { weekNumber } from '@/utils/week/weekNumber';
 import { getProcessedWrongAnswers, useWrongAnswerPagination } from '../utils/wronganswer';
-import { useDeleteSpeakAnswersMutation } from '@/mutations/speek-mutation';
+import { useDeleteSpeakAnswersMutation } from '@/mutations/speak-mutation';
 import { WrongAnswerComponentProps } from '@/types/wronganswer';
 import WrongAnswerPrevNext from './WrongAnswerPrevNext';
 import DefaultButton from '@/components/DefaultButton';
@@ -47,7 +47,7 @@ const SpeakAnswer = ({ tab }: WrongAnswerComponentProps) => {
     <>
       {!wrongAnswersData || wrongAnswersData.length === 0 ? (
         <div className='wronganswer-empty-text'>
-          <p className={`title-34 text-${tab.secondaryLightColor} max-md:title-24`}>오답이 아직 모이지 않았어요!</p>
+          <p className={`title-34 ${tab.secondaryLightTextColor} max-md:title-24`}>오답이 아직 모이지 않았어요!</p>
         </div>
       ) : (
         <>
@@ -58,16 +58,16 @@ const SpeakAnswer = ({ tab }: WrongAnswerComponentProps) => {
                 <div
                   key={index}
                   className={`${
-                    selectedQuestions.includes(answer.answer) ? `bg-${tab.contentPrimaryColor}` : ''
+                    selectedQuestions.includes(answer.answer) ? `${tab.contentPrimaryBgColor}` : ''
                   } flex items-center h-[5.25rem] px-8 py-4 rounded-lg bg-[#FEF2E0] max-md:h-auto max-md:px-3 max-md:py-[0.438rem]`}
                 >
                   <p
-                    className={`relative title-40 text-center text-${tab.contentSecondaryColor} pt-1 pr-[1.875rem] leading-none before:content-[''] before:absolute before:top-1/2 before:right-0 before:translate-y-[-50%] before:w-[0.313rem] before:h-[3.125rem] before:bg-[#FFB440] max-md:title-20 max-md:pr-[0.625rem] max-md:before:w-[0.125rem] max-md:before:h-[2.125rem]`}
+                    className={`relative w-[6.25rem] title-40 text-center ${tab.contentSecondaryTextColor} pt-1 pr-6 leading-none before:content-[''] before:absolute before:top-1/2 before:right-0 before:translate-y-[-50%] before:w-[0.25rem] before:h-[3.125rem] before:bg-[#FFB440] max-md:w-[3.125rem] max-md:title-20 max-md:pt-[0.125rem] max-md:pr-[0.625rem] max-md:before:w-[0.125rem] max-md:before:h-[2.125rem]`}
                   >
                     <span>{answer.score}</span>
                     <span className='text-2xl max-md:text-xs'>%</span>
                   </p>
-                  <p className='body-24 !leading-tight px-[1.563rem] max-md:caption-14 max-md:px-[0.625rem]'>
+                  <p className='w-[min-content] flex-auto body-24 !leading-tight px-[1.563rem] max-md:caption-14 max-md:px-[0.625rem]'>
                     {answer.answer}
                   </p>
                   <div className='ml-auto flex items-center'>
@@ -106,7 +106,7 @@ const SpeakAnswer = ({ tab }: WrongAnswerComponentProps) => {
           />
 
           {/* 삭제 버튼 */}
-          <div className={`wronganswer-delete-wrap ${tab.primaryColor}`}>
+          <div className={`wronganswer-delete-wrap ${tab.primaryBgColor}`}>
             <DefaultButton
               disabled={selectedQuestions.length === 0}
               className={`w-full max-w-[21.875rem] text-lg font-bold max-md:max-w-none ${tab.buttonColor} ${tab.buttonDisabledColor}`}

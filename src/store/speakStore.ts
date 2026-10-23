@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-type speek = {
+type speak = {
   index: number;
   percent: number;
   totlaPercent: number;
@@ -21,7 +21,7 @@ type speek = {
   setIsGame: (value: boolean) => void;
 };
 
-export const useSpeakStore = create<speek>((set) => ({
+export const useSpeakStore = create<speak>((set) => ({
   index: 0,
   percent: 0,
   totlaPercent: 0,

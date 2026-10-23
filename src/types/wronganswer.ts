@@ -14,13 +14,16 @@ export type AnswerData = {
 export type WrongAnswerTabData = {
   id: string;
   title: string;
-  primaryColor: string;
-  primaryLightColor: string;
-  secondaryColor: string;
-  secondaryLightColor: string;
-  contentPointColor: string;
-  contentPrimaryColor: string;
-  contentSecondaryColor: string;
+  primaryTextColor: string;
+  primaryBgColor: string;
+  primaryLightTextColor: string;
+  secondaryTextColor: string;
+  secondaryLightTextColor: string;
+  contentPointTextColor: string;
+  contentPrimaryBgColor: string;
+  contentPrimaryBorderColor: string;
+  contentSecondaryTextColor: string;
+  contentSecondaryBgColor: string;
   iconButtonColor: string;
   iconButtonDisabledColor: string;
   buttonColor: string;

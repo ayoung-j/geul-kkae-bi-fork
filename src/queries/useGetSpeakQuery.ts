@@ -2,7 +2,7 @@
 import browserClient from '@/utils/supabase/client';
 import { useQuery } from '@tanstack/react-query';
 
-const fetchSpeekUser = async (userId: string | undefined | null, weekNumber: number) => {
+const fetchSpeakUser = async (userId: string | undefined | null, weekNumber: number) => {
   const { data, error } = await browserClient.from('rank').select('*').eq('user_id', userId).eq('week', weekNumber);
   if (error || !userId) {
     throw new Error();
@@ -11,10 +11,10 @@ const fetchSpeekUser = async (userId: string | undefined | null, weekNumber: num
   }
 };
 
-export const useGetSpeekDataUser = (userId: string | undefined | null, weekNumber: number) => {
+export const useGetSpeakDataUser = (userId: string | undefined | null, weekNumber: number) => {
   return useQuery({
     queryKey: ['speak'],
-    queryFn: () => fetchSpeekUser(userId, weekNumber),
+    queryFn: () => fetchSpeakUser(userId, weekNumber),
     enabled: Boolean(userId),
     select: (data) => data || [],
   });

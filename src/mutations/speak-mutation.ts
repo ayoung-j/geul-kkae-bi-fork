@@ -2,7 +2,7 @@
 import browserClient from '@/utils/supabase/client';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-const insertSpeekScore = async (score: { score: number; userId: string; weekNumber: number }) => {
+const insertSpeakScore = async (score: { score: number; userId: string; weekNumber: number }) => {
   return await browserClient
     .from('rank')
     .insert({
@@ -17,9 +17,9 @@ export const useInsertMutation = () => {
   const client = useQueryClient();
 
   return useMutation({
-    mutationFn: insertSpeekScore,
+    mutationFn: insertSpeakScore,
     onSuccess: async () => {
-      client.invalidateQueries({ queryKey: ['speek'] });
+      client.invalidateQueries({ queryKey: ['speak'] });
     },
     onError: (error) => {
       console.error(error);
@@ -27,7 +27,7 @@ export const useInsertMutation = () => {
   });
 };
 
-const updateSpeekScore = async (score: { score: number; userId: string; week: number }) => {
+const updateSpeakScore = async (score: { score: number; userId: string; week: number }) => {
   return await browserClient
     .from('rank')
     .update({
@@ -40,9 +40,9 @@ export const useUpdateMutation = () => {
   const client = useQueryClient();
 
   return useMutation({
-    mutationFn: updateSpeekScore,
+    mutationFn: updateSpeakScore,
     onSuccess: async () => {
-      client.invalidateQueries({ queryKey: ['speek'] });
+      client.invalidateQueries({ queryKey: ['speak'] });
     },
     onError: (error) => {
       console.error(error);
@@ -50,7 +50,7 @@ export const useUpdateMutation = () => {
   });
 };
 
-const insertSpeekResult = async (result: {
+const insertSpeakResult = async (result: {
   userId: string | undefined;
   answer: string;
   game: string;
@@ -72,9 +72,9 @@ export const useInsertResultMutation = () => {
   const client = useQueryClient();
 
   return useMutation({
-    mutationFn: insertSpeekResult,
+    mutationFn: insertSpeakResult,
     onSuccess: async () => {
-      client.invalidateQueries({ queryKey: ['speekResult'] });
+      client.invalidateQueries({ queryKey: ['speakResult'] });
     },
     onError: (error) => {
       console.error(error);
